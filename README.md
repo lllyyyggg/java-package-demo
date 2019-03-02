@@ -74,6 +74,43 @@ java -cp .:./lib/log4j-1.2.17.jar:./lib/slf4j-api-1.7.25.jar:./lib/slf4j-log4j12
 
 其中`.:./lib/log4j-1.2.17.jar:./lib/slf4j-api-1.7.25.jar:./lib/slf4j-log4j12-1.7.25.jar`是依赖的三方`jar`包。windows使用`;`来代替`:`。
 
+1. 简单的打包
+
+```
+HelloWorld.class
+MANIFEST.MF
+jar cvfm helloworld.jar MANIFEST.MF HelloWorld.class
+```
+记住`MANIFEST.MF`里面必须有主类`Main-Class: HelloWorld`.
+
+2. 命令大全
+
+```
+创建jar包 jar cf hello.jar hello
+创建jar包显示过程 jar cvf hello.jar hello
+查看jar包内容 jar tvf hello.jar
+解压jar包 jar xvf hello.jar
+创建带有manifest.mf文件的jar包 jar cvfm helloworld.jar manifest.mf HelloWorld.class
+将内容导出到文件 jar -tvf helloworld.jar > hello.txt
+创建一个带包结构的jar包 jar cvfm hello.jar META-INF/MANIFEST.MF com/
+忽略Manifest.mf文件 jar cvfm hello.jar com/
+如果想包含其它的jar包，那么就将其它的jar包放在制定的目录下，然后在manifest.mf文件里面写入Class-Path: lib/some.jar lib/some2.jar 
+运行时传参 java -jar **.jar arg1 arg2 arg3
+```
+
+3. javac 
+
+```
+javac com/lanyage/Hello.java -d target
+
+编译的时候如果有依赖第三方jar包，必须javac -cp .:jar1:jar2... com/lanyage/** -d target 来指明所依赖的第三方jar包
+```
+
+
+
+
+
+
 
 
 
